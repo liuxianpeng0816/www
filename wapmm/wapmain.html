@@ -1,0 +1,145 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
+<meta name="Keywords" content="马赛克，MSK，匿名"/> 	
+<title>马赛克</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script type="text/javascript" src="./js/zepto.min.js"></script>
+<link rel="stylesheet" href="css/normal.css">
+<script type="text/javascript">
+	$(function(){
+		$(window).on("scroll",function(){
+			if($(window).scrollTop()>$("#_d_bigBtn").offset().top)
+			{
+				$("#float-download").show();
+			}
+			else
+			{
+				$("#float-download").hide();
+			}
+		});
+		/*微信检测*/
+		// wenxinTip();
+		function wenxinTip(){
+			var weixin = is_weixin();
+			if(weixin){
+				$("#weinxin_tip").show();
+				$(".tips-mask").show();
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		function is_weixin(){
+			var ua = navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i)=='micromessenger'){
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	/*$("#btndownload").click(function(){
+		if(wenxinTip())return;//检测是否处在微信浏览器
+	if(navigator.userAgent.indexOf('iPhone')!=-1||navigator.userAgent.indexOf('iPad')!=-1||navigator.userAgent.indexOf('Mac OS')!=-1){
+	//window.location.href='https://itunes.apple.com/us/app/qiao-qiao-you-mi-mi-qiao-qiao/id870466235?ls=1&mt=8';
+	alert('iPhone版即将上线,敬请期待.');
+	}
+	else //if(navigator.userAgent.indexOf('Android')!=-1)
+	{
+	window.location.href='msk.apk';
+	}
+	});*/
+	}); 
+</script> 
+</head>
+<body>
+<!-- 微信检测 -->
+<div class="tips-mask"></div>
+<div id="weinxin_tip">
+	<div class="txt">微信内无法下载，请点击<b>右上角</b>按钮<br />选择在<b>浏览器中打开</b>即可正常下载</div>
+	<div class="ico"></div>
+	
+</div>
+<!-- 浮动下载层 -->
+<div id="float-download">
+	<div class="content">
+		<div class="ico"></div>
+		<div class="float_down"></div>
+		<span class="text">
+			马赛克<br />
+			另一种沟通方式
+		</span>
+		<!-- 下载链接 qiaoqiao.apk-->
+		<a href="http://download.msk.cm/msk.apk" id="btndownload" class="download">
+		</a>
+	</div>
+</div>
+<div class="sc-wrap">
+	<div class="hd">
+		 <div class="content">
+		 	<div class="logo-img"></div>
+		 	<div class="cite-text"></div>
+		 </div>
+	</div>
+    <div class="all">
+	<!-- 下载 -->
+	<div class="bd download">
+		<div class="content">
+			<div class="logo-text"></div>
+			<div class="tip"></div>
+			<!-- 下载链接 -->
+            <a href="http://download.msk.cm/msk.apk" class="download"  id="_d_bigBtn">
+			<!--<a href="javascript:(void);" class="download" id="_d_bigBtn"> -->
+            <!--<span class="right">Android版<br />立即下载</span> -->
+			</a>
+		</div>
+	</div>
+	<!-- 匿名聊天 -->
+	<div class="bd self">
+		<div class="content">
+			<div class="ico1"></div>
+			<div class="title">匿名聊天</div>
+			<div class="desc">不敢向女神表白？不敢吐槽上司？想调侃朋友？匿名消息，隐藏身份，大胆说出你的心里话。</div>
+		</div>
+	</div> 
+	<!-- 约会神器 -->
+	<div class="bd anonymous">
+		<div class="content">
+			<div class="ico2"></div>
+			<div class="title">约会神器</div>
+			<div class="desc">你们彼此吸引，却不敢靠近。匿名许愿，系统匹配，让心有灵犀的人走到一起。</div>
+		</div>
+	</div>
+	<!-- 奇趣变声 -->
+	<div class="bd spread">
+		<div class="content">
+			<div class="ico3"></div>
+			<div class="title">奇趣变声</div>
+			<div class="desc">变成女神，调戏你的朋友；变个萝莉，卖萌耍宝。变声语音，保护隐私，想说就说。</div>
+		</div>
+	</div>
+	<!-- 许愿动态 -->
+	<div class="bd beauty">
+		<div class="content">
+			<div class="ico4"></div>
+			<div class="title">许愿动态</div>
+			<div class="desc">匿名和你的朋友分享生活；随时随地，查看来自朋友的分享，不敢说的秘密尽在许愿动态。</div>
+		</div>
+	</div>
+	<!-- 页底 -->
+	<div class="ft">
+		<div class="content">
+			Copyright @2014 马赛克团队
+		</div>
+	</div>
+    </div>
+</div>
+<div style="display:none;"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5930117'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D5930117%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

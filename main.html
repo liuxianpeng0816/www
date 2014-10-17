@@ -1,0 +1,129 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="Keywords" content="马赛克,匿名"/> 	
+<title>马赛克</title>
+<script type="text/javascript" src="/pc_js/183.js"></script>
+<script type="text/javascript" src="/pc_js/tun.js"></script>
+<link rel="stylesheet" href="/pc_css/normal.css">
+<script type="text/javascript">
+	$(function(){
+		/*轮播图片配置*/
+		var img = [
+			{
+				//title:"",
+				//href="",
+				url:"pc_img/1.jpg"
+			},
+			{
+				//title:"",
+				//href="",
+				url:"pc_img/2.jpg"
+			},
+			{
+				//title:"",
+				//href="",
+				url:"pc_img/3.jpg"
+			},
+			{
+				//title:"",
+				//href="",
+				url:"pc_img/4.jpg"
+			}
+		];
+		createHtml();
+		function createHtml(){
+			var html = "";
+			$.each(img,function(idx,v){
+				html += '<li><img src='+v.url+' /></li>';
+			});
+			$("#_marquee").find(".list").html(html);
+			setTimeout(function(){
+				marqueeStart()
+			},5000);
+		}
+		function marqueeStart(){
+			var $marquee = $("#_marquee").find(".list");
+			var $li = $marquee.find("li");
+			if($li.length <= 1)
+			{
+				return;
+			}
+			$marquee.width($li.width()*$li.length).animate({left:"-="+$li.first().width()},600,function(){
+				$(this).find("li:first").appendTo($(this));
+				$(this).css("left","0px");
+			});
+			setTimeout(function(){
+				marqueeStart()
+			},5000);
+		}
+	});
+</script>
+</head>
+<body>
+<div class="sc-wrap">
+	<div class="hd">
+         <div class="top-line"></div>
+		 <div class="content">
+		 	<div class="logo-img"></div>
+		 	<div class="cite-text"></div>
+			<div class="tip2">另一种沟通方式</div>
+		 </div>
+	</div>
+	<div class="bd">
+		<div class="content">
+			<div class="logo-text"></div>
+			<span class="tip">匿名聊天</span>
+			<!-- android下载 -->
+			<a href="http://download.msk.cm/msk.apk" class="download android">
+				<!--<span class="left"><i></i></span> -->
+			    <span class="right">Android版<br />立即下载</span>
+			</a>
+			<a href="" class="android"></a>
+			<div class="marquee" id="_marquee">
+				<div class="c-box">
+					<ul class="list">
+						loading...
+					</ul>
+				</div>
+			</div>
+			<div class="desc d1">
+				<dl>
+					<!--<dt class="ico"></dt> -->
+					<dd class="d-title">匿名聊天</dd>
+					<dd class="d-content">不敢向女神表白？不敢吐槽上司？想调侃朋友？匿名消息，隐藏身份，大胆说出你的心里话。</dd>
+				</dl>
+			</div>
+			<div class="desc d2">
+				<dl>
+					<!--<dt class="ico"></dt> -->
+					<dd class="d-title">奇趣变声</dd>
+					<dd class="d-content">变成女神，调戏你的朋友；变个萝莉，卖萌耍宝。变声语音，保护隐私，想说就说。</dd>
+				</dl>
+			</div>
+			<div class="desc d3">
+				<dl>
+					<!--<dt class="ico"></dt>-->
+					<dd class="d-title">约会神器</dd>
+					<dd class="d-content">你们彼此吸引，却不敢靠近。匿名许愿，系统匹配，让心有灵犀的人走到一起。</dd>
+				</dl>
+			</div>
+			<div class="desc d4">
+				<dl>
+					<!--<dt class="ico"></dt>-->
+					<dd class="d-title">许愿动态</dd>
+					<dd class="d-content">匿名和你的朋友分享生活；随时随地，查看来自朋友的分享，不敢说的秘密尽在许愿动态。</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="ft">
+        <div class="bottom-line"></div>
+		<div class="content">
+			Copyright @2014 马赛克团队
+		</div>
+	</div>
+</div>
+</body>
+</html>

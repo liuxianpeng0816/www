@@ -1,0 +1,392 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>收月饼&拼人气挑战赛</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script type="text/javascript" src="./js/zepto.min.js"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/zhongqiu.css">
+<script src='js/msk.js'></script>
+<style type="text/css">
+.sc-yq {
+    padding: 10px;
+}
+
+.sc-yq .upper {
+
+    height: 520px;
+    width:auto;
+    border-radius: 6px 6px 0 0;
+    /*background-color:#97c1cd;*/
+    background-image: url(./images/background.jpg);
+    padding-left: 16px;;
+    padding-bottom: 12px;
+    margin-top: 0px;
+    padding-right: 16px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.sc-yq .upper .text1 {
+    font-size: 20px;
+    color: #ff8900;
+    line-height: 36px;
+    margin: 0 auto;
+    padding-top: 35px;
+    font-weight: bold;
+}
+
+.sc-yq .upper .text2 {
+    font-size: 16px;
+    color: #ff8900;
+    line-height: 20px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.sc-yq .upper .tip1 {
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 70px;
+}
+
+.sc-yq .upper .input {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.sc-yq .upper .input .nickname {
+    /*padding-left:50px;*/
+}
+
+.sc-yq .upper .input .phonenumber {
+    /*padding-left:50px;*/
+    margin-top: 23px;
+    right: 10px;
+}
+
+.sc-yq .upper .input .tip2 {
+    color: #ffffff;
+    font-size: 15px;
+    top: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 3px;
+
+}
+
+.sc-yq .upper .challange {
+
+    height: 100px;
+    width: 100px;
+    border-radius: 6px;
+    background-color: transparent;
+    background-image: url(./images/btn_1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 0px;
+    display: block;
+    margin: auto;
+    margin-top: 13px;
+}
+
+.sc-yq .upper .challange:hover {
+
+    background-image: url(./images/btn_2.png);
+    background-repeat: no-repeat;
+    border: 0px;
+}
+
+.content .float_down {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    background-image: url(./images/float_down.png);
+    background-repeat: no-repeat;
+    bottom: -77px;
+    left: -10px;
+    background-size: 44% auto;
+}
+
+#float-download {
+    position: fixed;
+    bottom: 0px;
+    background-color: #2E2E2F;
+    width: 100%;
+    height: 43px;
+    z-index: 10;
+}
+
+#float-download .content {
+    width: 300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#float-download .content .text {
+    font-size: 14px;
+    color: #FFF;
+    line-height: 17px;
+    position: absolute;
+    left: 30px;
+    top: 5px;
+}
+
+#float-download .content .download {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: -90px;
+    width: 150px;
+    height: 58px;
+    line-height: 29px;
+    text-align: center;
+    /*background-color: #1fc0e0;*/
+    background-image: url(./images/float_predown.png);
+    background-repeat: no-repeat;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 2px;
+    background-size: 45% auto;
+}
+
+#float-download .content .download:active {
+    /*background-color: #009fbf;*/
+    background-image: url(./images/float_active.png);
+    background-repeat: no-repeat;
+}
+</style>
+<script type="text/javascript">
+    $(function () {
+
+        /*var url = document.location.href;
+         var link = url.split("=");*/
+        if (getParam('isapp') == 1) {
+            $("#float-download").hide();
+        }
+        else {
+            $("#float-download").show();
+        }
+
+        var sc = getParam('sc');
+        if ("" != sc){
+            document.getElementById('challange').style.backgroundImage="url(./images/pk_1.png)";
+
+            document.getElementById("challange").onmouseover = function(){
+                document.getElementById('challange').style.backgroundImage="url(./images/pk_2.png)";
+            }
+            document.getElementById("challange").onmouseout = function(){
+                document.getElementById('challange').style.backgroundImage="url(./images/pk_1.png)";
+            }
+        }
+
+        /*$(window).on("scroll", function () {
+         if ($(window).scrollTop() > $("#_d_bigBtn").offset().top) {
+         $("#float-download").show();
+         }
+         else {
+         $("#float-download").show();
+         }
+         });*/
+        /*微信检测*/
+        // wenxinTip();
+        function wenxinTip() {
+            var weixin = is_weixin();
+            if (weixin) {
+                $("#weinxin_tip").show();
+                $(".tips-mask").show();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function is_weixin() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $("#btndownload").click(function () {
+            if (wenxinTip())return;//检测是否处在微信浏览器
+            if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1 || navigator.userAgent.indexOf('Mac OS') != -1) {
+                alert('iPhone版即将上线,敬请期待.');
+            }
+            else //if(navigator.userAgent.indexOf('Android')!=-1)
+            {
+                window.location.href = '/msk.apk?f=hd.zq.zq';
+            }
+        });
+    });
+    function getParam(paramName) {
+        paramValue = "";
+        isFound = false;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+            i = 0;
+            while (i < arrSource.length && !isFound) {
+                if (arrSource[i].indexOf("=") > 0) {
+                    if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+                        paramValue = arrSource[i].split("=")[1];
+                        isFound = true;
+                    }
+                }
+                i++;
+            }
+        }
+        return paramValue;
+    }
+    $(document).ready(function () {
+        $(".moonday").find("#challange").on("click", function () {
+            var nickname = document.getElementById("nickname");
+            if (nickname.value == "") {
+                alert('昵称不能为空！');
+                document.getElementById("nickname").value = "";
+                nickname.focus();
+                return false;
+            }
+            var phonenumber = document.getElementById("phonenumber");
+
+            if (phonenumber.value == "") {
+                alert('请输入联系电话！');
+                document.getElementById("phonenumber").value = "";
+                phonenumber.focus();
+                return false;
+            }
+            else {
+                var reg = /^(\d{3,4})-(\d{7,8})/;//验证电话号码
+                var regph = /[1][3-9][0-9]{9,9}/;//验证手机号码
+                if (phonenumber.value.constructor === String) {
+                    var re = phonenumber.value.match(reg);
+                    var reph = phonenumber.value.match(regph);
+                    if (re == null && reph == null)//只能输入正确格式的手机或电话号码
+                    {
+                        alert('请输入联系电话！');
+                        document.getElementById("phonenumber").value = "";
+                        phonenumber.focus();
+                        return false;
+                    }
+                }
+            }
+            // 从cookie中拿wid
+            var wishid = getCookie('wid');
+            setCookie('spn', phonenumber.value);
+            SendReply(nickname.value, phonenumber.value, wishid);
+        });
+        function SendReply(nickname, phonenumber, wishid, isapp) {
+            document.getElementById("nickname").value = "";
+            document.getElementById("phonenumber").value = "";
+            var sc = getParam('sc');
+            $.ajax({
+                url: '/hd/zq_init',
+                type: 'post',
+                data: {
+                    a: 2020,
+                    name: nickname,
+                    pn: phonenumber,
+                    wid: wishid,
+                    sc:sc
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code === 0) {
+                        var isapp = getParam('isapp');
+                        window.location.href = data.url + '&isapp=' + isapp;
+                    }
+                    else if (data.code === 2) {
+                        alert("参数错误");
+                    }
+                    else if (data.code === 3) {
+                        alert("超过评论次数限制");
+                    }
+                    else if (data.code === 10005) {
+                        alert("系统内部错误");
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+    });
+</script>
+</head>
+
+
+
+<body style="background-color:#ffffff">
+<!-- 微信检测 -->
+<div class="tips-mask"></div>
+<div id="weinxin_tip">
+    <div class="txt">微信内无法下载，请点击<b>右上角</b>按钮<br/>选择在<b>浏览器中打开</b>即可正常下载</div>
+    <div class="ico"></div>
+</div>
+<!-- 浮动下载层 -->
+<div id="float-download">
+    <div class="content">
+        <div class="ico"></div>
+        <div class="float_down"></div>
+        <span class="text">马赛克<br/>能给朋友发匿名消息 + 表白神器</span>
+        <a href="http://download.msk.cm/msk.apk?f=hd.zq.zq" id="btndownload" class="download" onclick="downloadCount()"></a>
+    </div>
+</div>
+<div class="sc-yq">
+
+    <div class="upper">
+        <div class="title" id="_d_bigBtn">
+            <!--<span class="share-type">朋友分享的匿名聊天</span> -->
+        </div>
+        <div class="text1">
+            <p>
+            <center>积攒了这么多年，是时候和朋友拼拼人气了～</center>
+            </p>
+        </div>
+        <div class="text2">
+            <p>
+            <center>先收满888个月饼者胜利！！！</center>
+            </p>
+        </div>
+
+        <div class="bd">
+            <div class="txt">
+                <!--<span class="p1"><pre>{%$ShareContent%}</pre></span> -->
+            </div>
+        </div>
+
+        <div class="tip1">
+            <center>填入昵称，方便好友加入你的挑战</center>
+        </div>
+
+        <div class="input">
+            <div class="nickname"  style="*position:relative; *top:-50%; text-align:center; width:100%;">
+                <input type="text" maxlength="6" style="height:40px;width:200px;background-color:#00233e;border:2px solid #347eb7;color:#ffffff" id="nickname" value="" placeholder="输入你的昵称"/>
+            </div>
+            <div class="tip2">
+                <center>填手机号，收到挑战时，我们会短信通知你~</center>
+            </div>
+            <div class="phonenumber" style="*position:relative; *top:-50%; text-align:center; width:100%;">
+                <input type="text"
+                       style="height:40px;width:200px;background-color:#00233e;border:2px solid #347eb7;color:#ffffff"
+                       id="phonenumber" value="" placeholder="输入你的手机号"/>
+            </div>
+        </div>
+
+        <div class="moonday">
+            <input type="button" value="" class="challange" id="challange"/>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
+
